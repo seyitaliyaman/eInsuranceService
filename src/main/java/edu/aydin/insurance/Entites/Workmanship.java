@@ -6,22 +6,24 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 
 @Entity
-@Table(name = "vehicle_owner")
+@Table(name = "workmanship")
 @NoArgsConstructor
-public class VehicleOwner {
+public class Workmanship {
 
     @Getter
     @Setter
     @Id
-    @GeneratedValue(generator = "vehicleowner-sequence-generator")
+    @GeneratedValue(generator = "workmanship-sequence-generator")
     @GenericGenerator(
-            name = "vehicleowner-sequence-generator",
+            name = "workmanship-sequence-generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "vehicleowner_sequence"),
+                    @Parameter(name = "sequence_name", value = "workmanship_sequence"),
                     @Parameter(name = "initial_value", value = "1"),
                     @Parameter(name = "increment_size", value = "1")
             }
@@ -30,31 +32,28 @@ public class VehicleOwner {
 
     @Getter
     @Setter
-    @Column(name = "owner_tc")
-    private Long ownerTC;
+    @Column(name = "cost")
+    private Long cost;
 
     @Getter
     @Setter
-    @Column(name = "owner_vkn")
-    private Long ownerVKN;
+    @Column(name = "is_done")
+    private boolean isDone;
 
     @Getter
     @Setter
-    @Column(name = "owner_vd")
-    private Long ownerVD;
+    @ManyToMany
+    private List<WorkOrder> workOrder;
 
     @Getter
     @Setter
-    @Column(name = "owner_name")
-    private String ownerName;
+    @ManyToMany
+    private List<WorkmanshipPart> workmanshipPart;
 
     @Getter
     @Setter
-    @Column(name = "owner_surname")
-    private String ownerSurname;
+    @ManyToMany
+    private List<VehiclePart> vehiclePart;
 
-    @Getter
-    @Setter
-    @Column(name = "owner_phone")
-    private String ownerPhone;
+
 }

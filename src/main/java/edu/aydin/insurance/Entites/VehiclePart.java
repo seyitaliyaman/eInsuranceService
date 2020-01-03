@@ -9,19 +9,19 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "expert")
+@Table(name = "vehicle_part")
 @NoArgsConstructor
-public class Expert {
+public class VehiclePart {
 
     @Getter
     @Setter
     @Id
-    @GeneratedValue(generator = "expert-sequence-generator")
+    @GeneratedValue(generator = "vehiclepart-sequence-generator")
     @GenericGenerator(
-            name = "expert-sequence-generator",
+            name = "vehiclepart-sequence-generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "expert_sequence"),
+                    @Parameter(name = "sequence_name", value = "vehiclepart_sequence"),
                     @Parameter(name = "initial_value", value = "1"),
                     @Parameter(name = "increment_size", value = "1")
             }
@@ -30,16 +30,7 @@ public class Expert {
 
     @Getter
     @Setter
-    @Column(name = "expert_name")
-    private String expertName;
+    @Column(name = "vehicle_part_name")
+    private String vehiclePartName;
 
-    @Getter
-    @Setter
-    @Column(name = "expert_surname")
-    private String expertSurname;
-
-    @Getter
-    @Setter
-    @Column(name = "expert_phone")
-    private String expertPhone;
 }

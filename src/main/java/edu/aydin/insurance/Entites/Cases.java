@@ -3,11 +3,9 @@ package edu.aydin.insurance.Entites;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Date;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+import javax.persistence.*;
 
 
 @Entity
@@ -17,37 +15,45 @@ public class Cases {
 
     @Getter
     @Setter
-    @Column(name = "case")
-    private Long caseId;
+    @Id
+    @GeneratedValue(generator = "case-sequence-generator")
+    @GenericGenerator(
+            name = "case-sequence-generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "case_sequence"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1")
+            }
+    )
+    private Long id;
+
+
     @Getter
     @Setter
     @Column(name = "file_no")
     private Long fileNo;
 
-    @Getter
-    @Setter
-    @Column(name = "policy_no")
-    private Long policyNo;
 
     @Getter
     @Setter
-    @Column(name = "agency_no")
-    private Long agencyNo;
+    @ManyToOne
+    private Policy policy;
 
     @Getter
     @Setter
-    @Column(name = "policy_start_date")
-    private Date policyStartDate;
+    @OneToOne
+    private IncidentInfo incidentInfo;
 
     @Getter
     @Setter
-    @Column(name = "policy_end_date")
-    private Date policyEndDate;
+    @ManyToOne
+    private Service service;
 
     @Getter
     @Setter
-    @Column(name = "expert_id")
-    private Long expertId;
+    @ManyToOne
+    private Expert expert;
 
 
 }

@@ -6,22 +6,24 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 
 @Entity
-@Table(name = "expert")
+@Table(name = "used_pieces")
 @NoArgsConstructor
-public class Expert {
+public class UsedPieces {
 
     @Getter
     @Setter
     @Id
-    @GeneratedValue(generator = "expert-sequence-generator")
+    @GeneratedValue(generator = "usedpieces-sequence-generator")
     @GenericGenerator(
-            name = "expert-sequence-generator",
+            name = "usedpieces-sequence-generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "expert_sequence"),
+                    @Parameter(name = "sequence_name", value = "usedpieces_sequence"),
                     @Parameter(name = "initial_value", value = "1"),
                     @Parameter(name = "increment_size", value = "1")
             }
@@ -30,16 +32,18 @@ public class Expert {
 
     @Getter
     @Setter
-    @Column(name = "expert_name")
-    private String expertName;
+    @Column(name = "quantity")
+    private Long quantity;
 
     @Getter
     @Setter
-    @Column(name = "expert_surname")
-    private String expertSurname;
+    @ManyToMany
+    private List<WorkOrder> workOrder;
 
     @Getter
     @Setter
-    @Column(name = "expert_phone")
-    private String expertPhone;
+    @ManyToOne
+    private Piece piece;
+
+
 }

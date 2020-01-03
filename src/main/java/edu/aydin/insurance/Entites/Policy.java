@@ -6,22 +6,23 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
-@Table(name = "vehicle_owner")
+@Table(name = "policy")
 @NoArgsConstructor
-public class VehicleOwner {
+public class Policy {
 
     @Getter
     @Setter
     @Id
-    @GeneratedValue(generator = "vehicleowner-sequence-generator")
+    @GeneratedValue(generator = "policy-sequence-generator")
     @GenericGenerator(
-            name = "vehicleowner-sequence-generator",
+            name = "policy-sequence-generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "vehicleowner_sequence"),
+                    @Parameter(name = "sequence_name", value = "policy_sequence"),
                     @Parameter(name = "initial_value", value = "1"),
                     @Parameter(name = "increment_size", value = "1")
             }
@@ -30,31 +31,22 @@ public class VehicleOwner {
 
     @Getter
     @Setter
-    @Column(name = "owner_tc")
-    private Long ownerTC;
+    @Column(name = "policy_no")
+    private Long policyNo;
 
     @Getter
     @Setter
-    @Column(name = "owner_vkn")
-    private Long ownerVKN;
+    @Column(name = "policy_start_date")
+    private Date policyStartDate;
 
     @Getter
     @Setter
-    @Column(name = "owner_vd")
-    private Long ownerVD;
+    @Column(name = "policy_end_date")
+    private Date policyEndDate;
 
     @Getter
     @Setter
-    @Column(name = "owner_name")
-    private String ownerName;
+    @ManyToOne
+    private Agency agency;
 
-    @Getter
-    @Setter
-    @Column(name = "owner_surname")
-    private String ownerSurname;
-
-    @Getter
-    @Setter
-    @Column(name = "owner_phone")
-    private String ownerPhone;
 }

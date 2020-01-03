@@ -9,19 +9,19 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "vehicle_owner")
+@Table(name = "work_order")
 @NoArgsConstructor
-public class VehicleOwner {
+public class WorkOrder {
 
     @Getter
     @Setter
     @Id
-    @GeneratedValue(generator = "vehicleowner-sequence-generator")
+    @GeneratedValue(generator = "workorder-sequence-generator")
     @GenericGenerator(
-            name = "vehicleowner-sequence-generator",
+            name = "workorder-sequence-generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "vehicleowner_sequence"),
+                    @Parameter(name = "sequence_name", value = "workorder_sequence"),
                     @Parameter(name = "initial_value", value = "1"),
                     @Parameter(name = "increment_size", value = "1")
             }
@@ -30,31 +30,23 @@ public class VehicleOwner {
 
     @Getter
     @Setter
-    @Column(name = "owner_tc")
-    private Long ownerTC;
+    @Column(name = "vehicle_km")
+    private Long vehicleKm;
 
     @Getter
     @Setter
-    @Column(name = "owner_vkn")
-    private Long ownerVKN;
+    @Column(name = "vehicle_chassis")
+    private String vehicleChassis;
 
     @Getter
     @Setter
-    @Column(name = "owner_vd")
-    private Long ownerVD;
+    @OneToOne
+    private Cases cases;
 
     @Getter
     @Setter
-    @Column(name = "owner_name")
-    private String ownerName;
+    @OneToOne
+    private VehicleInfo vehicleInfo;
 
-    @Getter
-    @Setter
-    @Column(name = "owner_surname")
-    private String ownerSurname;
 
-    @Getter
-    @Setter
-    @Column(name = "owner_phone")
-    private String ownerPhone;
 }

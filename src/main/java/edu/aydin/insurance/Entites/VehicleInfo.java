@@ -3,10 +3,12 @@ package edu.aydin.insurance.Entites;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "vehicle_info")
@@ -15,13 +17,23 @@ public class VehicleInfo {
 
     @Getter
     @Setter
-    @Column(name = "owner_id")
-    private Long ownerId;
+    @Id
+    @GeneratedValue(generator = "vehicleinfo-sequence-generator")
+    @GenericGenerator(
+            name = "vehicleinfo-sequence-generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "vehicleinfo_sequence"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1")
+            }
+    )
+    private Long id;
 
     @Getter
     @Setter
-    @Column(name = "vehicle_licence_plate")
-    private String vehicleLicencePlate;
+    @Column(name = "vehicle_plate")
+    private String vehiclePlate;
 
     @Getter
     @Setter
@@ -37,5 +49,15 @@ public class VehicleInfo {
     @Setter
     @Column(name = "vehicle_usage")
     private String vehicleUsage;
+
+    @Getter
+    @Setter
+    @OneToMany
+    private List<VehicleOwner> vehicleOwner;
+
+    @Getter
+    @Setter
+    @ManyToMany
+    private List<Driver> driver;
 
 }
