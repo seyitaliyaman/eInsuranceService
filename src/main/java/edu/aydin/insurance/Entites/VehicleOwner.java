@@ -30,17 +30,17 @@ public class VehicleOwner {
 
     @Getter
     @Setter
-    @Column(name = "owner_tc")
+    @Column(name = "owner_tc",unique = true)
     private Long ownerTC;
 
     @Getter
     @Setter
-    @Column(name = "owner_vkn")
+    @Column(name = "owner_vkn",unique = true)
     private Long ownerVKN;
 
     @Getter
     @Setter
-    @Column(name = "owner_vd")
+    @Column(name = "owner_vd",unique = true)
     private Long ownerVD;
 
     @Getter

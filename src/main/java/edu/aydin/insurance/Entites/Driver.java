@@ -30,7 +30,7 @@ public class Driver {
 
     @Getter
     @Setter
-    @Column(name = "driver_tc")
+    @Column(name = "driver_tc",unique = true)
     private String driverTC;
 
     @Getter

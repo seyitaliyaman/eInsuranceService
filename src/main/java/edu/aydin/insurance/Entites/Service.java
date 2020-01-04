@@ -40,12 +40,12 @@ public class Service {
 
     @Getter
     @Setter
-    @Column(name = "service_vkn")
+    @Column(name = "service_vkn",unique = true)
     private Long VKN;
 
     @Getter
     @Setter
-    @Column(name = "service_vd")
+    @Column(name = "service_vd",unique = true)
     private Long VD;
 
     @Getter
