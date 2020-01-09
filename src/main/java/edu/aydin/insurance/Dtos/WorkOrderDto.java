@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkOrderDto {
@@ -20,6 +22,10 @@ public class WorkOrderDto {
     @Getter
     @Setter
     private String vehicleChassis;
+
+    @Getter
+    @Setter
+    private String motorNumber;
 
     @Getter
     @Setter

@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -34,6 +35,11 @@ public class Cases {
     @Column(name = "file_no")
     private Long fileNo;
 
+    @Getter
+    @Setter
+    @Column(name = "create_date")
+    private Date createDate;
+
 
     @Getter
     @Setter
@@ -48,7 +54,7 @@ public class Cases {
     @Getter
     @Setter
     @ManyToOne
-    private Service service;
+    private ServiceInc service;
 
     @Getter
     @Setter

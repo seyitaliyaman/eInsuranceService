@@ -40,5 +40,5 @@ public class UserAccount {
     @Getter
     @Setter
     @OneToOne
-    private Service service;
+    private ServiceInc service;
 }

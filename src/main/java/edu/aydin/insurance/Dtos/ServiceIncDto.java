@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServiceDto {
+public class ServiceIncDto {
 
     @Getter
     @Setter
@@ -27,7 +27,7 @@ public class ServiceDto {
 
     @Getter
     @Setter
-    private Long VD;
+    private String VD;
 
     @Getter
     @Setter

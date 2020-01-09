@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "service")
 @NoArgsConstructor
-public class Service {
+public class ServiceInc {
 
     @Getter
     @Setter
@@ -45,8 +45,8 @@ public class Service {
 
     @Getter
     @Setter
-    @Column(name = "service_vd",unique = true)
-    private Long VD;
+    @Column(name = "service_vd")
+    private String VD;
 
     @Getter
     @Setter

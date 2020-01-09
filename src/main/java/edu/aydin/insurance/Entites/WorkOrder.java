@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
 import javax.persistence.*;
 
 
@@ -37,6 +38,11 @@ public class WorkOrder {
     @Setter
     @Column(name = "vehicle_chassis")
     private String vehicleChassis;
+
+    @Getter
+    @Setter
+    @Column(name= "motor_number")
+    private String motorNumber;
 
     @Getter
     @Setter

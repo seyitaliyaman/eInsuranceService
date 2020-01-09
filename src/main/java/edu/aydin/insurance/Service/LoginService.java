@@ -1,8 +1,9 @@
 package edu.aydin.insurance.Service;
 
-import edu.aydin.insurance.Dtos.ServiceDto;
+import edu.aydin.insurance.Dtos.ServiceIncDto;
+import edu.aydin.insurance.Entites.ServiceInc;
 import edu.aydin.insurance.Entites.UserAccount;
-import edu.aydin.insurance.Repository.ServiceRepository;
+import edu.aydin.insurance.Repository.ServiceIncRepository;
 import edu.aydin.insurance.Repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
@@ -13,10 +14,10 @@ public class LoginService {
     @Autowired
     private UserAccountRepository userAccountRepository;
     @Autowired
-    private ServiceRepository serviceRepository;
+    private ServiceIncRepository serviceIncRepository;
 
 
-    public ServiceDto login(String username, String password){
+    public ServiceIncDto login(String username, String password){
 
         UserAccount userAccount = userAccountRepository.findByUsernameAndPassword(username,password).get();
         if(userAccount==null){
@@ -25,15 +26,15 @@ public class LoginService {
             System.out.println("user account found!");
         }
 
-        edu.aydin.insurance.Entites.Service service = serviceRepository.findById(userAccount.getService().getId()).get();
+        ServiceInc serviceInc = serviceIncRepository.findById(userAccount.getService().getId()).get();
 
-        return new ServiceDto(service.getId(),
-                service.getServiceName(),
-                service.getServicePhone(),
-                service.getVKN(),
-                service.getVD(),
-                service.getServiceAddress(),
-                service.getServiceEmail());
+        return new ServiceIncDto(serviceInc.getId(),
+                serviceInc.getServiceName(),
+                serviceInc.getServicePhone(),
+                serviceInc.getVKN(),
+                serviceInc.getVD(),
+                serviceInc.getServiceAddress(),
+                serviceInc.getServiceEmail());
     }
 
 

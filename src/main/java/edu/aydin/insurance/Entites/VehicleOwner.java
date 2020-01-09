@@ -40,8 +40,8 @@ public class VehicleOwner {
 
     @Getter
     @Setter
-    @Column(name = "owner_vd",unique = true)
-    private Long ownerVD;
+    @Column(name = "owner_vd")
+    private String ownerVD;
 
     @Getter
     @Setter
@@ -57,4 +57,10 @@ public class VehicleOwner {
     @Setter
     @Column(name = "owner_phone")
     private String ownerPhone;
+
+    @Getter
+    @Setter
+    @Column(name = "owner_address")
+    private String ownerAddress;
+
 }

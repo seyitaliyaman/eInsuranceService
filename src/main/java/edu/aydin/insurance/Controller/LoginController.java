@@ -1,6 +1,6 @@
 package edu.aydin.insurance.Controller;
 
-import edu.aydin.insurance.Dtos.ServiceDto;
+import edu.aydin.insurance.Dtos.ServiceIncDto;
 import edu.aydin.insurance.Dtos.UserAccountDto;
 import edu.aydin.insurance.Service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping(path = "/auth")
-    public ResponseEntity<ServiceDto> login(@RequestBody UserAccountDto userAccountDto){
+    public ResponseEntity<ServiceIncDto> login(@RequestBody UserAccountDto userAccountDto){
 
         return new ResponseEntity(loginService.login(userAccountDto.getUsername(),userAccountDto.getPassword()), HttpStatus.OK);
     }

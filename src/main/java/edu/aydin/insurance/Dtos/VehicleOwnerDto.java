@@ -23,7 +23,7 @@ public class VehicleOwnerDto {
 
     @Getter
     @Setter
-    private Long ownerVD;
+    private String ownerVD;
 
     @Getter
     @Setter
@@ -36,4 +36,8 @@ public class VehicleOwnerDto {
     @Getter
     @Setter
     private String ownerPhone;
+
+    @Setter
+    @Getter
+    private String ownerAddress;
 }

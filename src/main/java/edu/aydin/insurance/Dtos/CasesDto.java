@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class CasesDto {
@@ -19,6 +21,10 @@ public class CasesDto {
 
     @Getter
     @Setter
+    private Date createDate;
+
+    @Getter
+    @Setter
     private PolicyDto policyDto;
 
     @Getter
@@ -27,7 +33,7 @@ public class CasesDto {
 
     @Getter
     @Setter
-    private ServiceDto serviceDto;
+    private ServiceIncDto serviceDto;
 
     @Getter
     @Setter
