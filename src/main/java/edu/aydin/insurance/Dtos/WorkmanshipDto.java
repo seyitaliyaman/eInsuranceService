@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkmanshipDto {
@@ -23,10 +25,10 @@ public class WorkmanshipDto {
 
     @Getter
     @Setter
-    private WorkmanshipPartDto workmanshipPartDto;
+    private List<WorkmanshipPartDto> workmanshipPartDto;
 
     @Getter
     @Setter
-    private VehiclePartDto vehiclePartDto;
+    private List<VehiclePartDto> vehiclePartDto;
 
 }

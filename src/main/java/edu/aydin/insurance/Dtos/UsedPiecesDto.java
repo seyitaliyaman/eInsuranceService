@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsedPiecesDto {
@@ -19,7 +21,7 @@ public class UsedPiecesDto {
 
     @Getter
     @Setter
-    private WorkOrderDto workOrderDto;
+    private List<WorkOrderDto> workOrderDto;
 
     @Getter
     @Setter
