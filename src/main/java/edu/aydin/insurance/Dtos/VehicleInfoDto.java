@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class VehicleInfoDto {
@@ -35,5 +37,5 @@ public class VehicleInfoDto {
 
     @Getter
     @Setter
-    private DriverDto driverDto;
+    private List<DriverDto> driverDto;
 }

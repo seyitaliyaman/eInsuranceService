@@ -37,7 +37,7 @@ public class Agency {
 
     @Getter
     @Setter
-    @OneToMany
-    private List<InsuranceCompany> insuranceCompany;
+    @ManyToOne
+    private InsuranceCompany insuranceCompany;
 
 }

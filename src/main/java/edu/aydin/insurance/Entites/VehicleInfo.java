@@ -52,8 +52,8 @@ public class VehicleInfo {
 
     @Getter
     @Setter
-    @OneToMany
-    private List<VehicleOwner> vehicleOwner;
+    @ManyToOne
+    private VehicleOwner vehicleOwner;
 
     @Getter
     @Setter
