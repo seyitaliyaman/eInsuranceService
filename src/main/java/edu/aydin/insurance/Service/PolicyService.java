@@ -15,6 +15,12 @@ public class PolicyService {
     @Autowired
     private AgencyService agencyService;
 
+    public Policy addPolicy(PolicyDto policyDto){
+        Policy policy = fromDto(policyDto);
+        policyRepository.save(policy);
+        return policy;
+    }
+
 
     public Policy fromDto(PolicyDto policyDto){
         Policy policy = new Policy();

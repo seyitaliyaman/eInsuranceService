@@ -1,6 +1,8 @@
 package edu.aydin.insurance.Service;
 
+import edu.aydin.insurance.Dtos.DriverDto;
 import edu.aydin.insurance.Dtos.VehicleInfoDto;
+import edu.aydin.insurance.Entites.Driver;
 import edu.aydin.insurance.Entites.VehicleInfo;
 import edu.aydin.insurance.Exceptions.VehicleInfoNotFoundException;
 import edu.aydin.insurance.Repository.DriverRepository;
@@ -8,6 +10,8 @@ import edu.aydin.insurance.Repository.VehicleInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +30,20 @@ public class VehicleInfoService {
     @Autowired
     private DriverRepository driverRepository;
 
+    public VehicleInfo addVehicleInfo(VehicleInfoDto vehicleInfoDto){
+        VehicleInfo vehicleInfo = fromDto(vehicleInfoDto);
+        vehicleInfoRepository.save(vehicleInfo);
+        return vehicleInfo;
+    }
+
+    public List<VehicleInfoDto>  getVehicleInfosByDriverId(Long driverId){
+        Optional<List<VehicleInfo>> vehicleInfos = vehicleInfoRepository.findAllByDriver(driverId);
+        List<VehicleInfoDto> vehicleInfoDtoList = new ArrayList<>();
+        for(VehicleInfo vehicleInfo: vehicleInfos.get())
+            vehicleInfoDtoList.add(toDto(vehicleInfo));
+        return vehicleInfoDtoList;
+    }
+
 
     public VehicleInfoDto getVehicleInfoById(Long id){
         Optional<VehicleInfo> vehicleInfo = vehicleInfoRepository.findById(id);
@@ -38,6 +56,11 @@ public class VehicleInfoService {
 
 
     public VehicleInfoDto toDto(VehicleInfo vehicleInfo){
+        List<Driver> driverList = vehicleInfo.getDriver();
+        List<DriverDto> driverDtoList = new ArrayList<>();
+        for(Driver driver : driverList)
+            driverDtoList.add(driverService.toDto(driver));
+
 
         return new VehicleInfoDto(
                 vehicleInfo.getId(),
@@ -46,12 +69,16 @@ public class VehicleInfoService {
                 vehicleInfo.getVehicleModel(),
                 vehicleInfo.getVehicleUsage(),
                 vehicleOwnerService.getVehicleOwnerById(vehicleInfo.getVehicleOwner().getId()),
-                null
-
+                driverDtoList
         );
     }
 
     public VehicleInfo fromDto(VehicleInfoDto vehicleInfoDto){
+
+        List<DriverDto> driverDtoList = vehicleInfoDto.getDriverDto();
+        List<Driver> driverList = new ArrayList<>();
+        for(DriverDto driverDto : driverDtoList)
+            driverList.add(driverService.fromDto(driverDto));
 
         VehicleInfo vehicleInfo = new VehicleInfo();
         vehicleInfo.setVehicleBrand(vehicleInfoDto.getVehicleBrand());
@@ -59,7 +86,7 @@ public class VehicleInfoService {
         vehicleInfo.setVehiclePlate(vehicleInfoDto.getVehiclePlate());
         vehicleInfo.setVehicleUsage(vehicleInfo.getVehicleUsage());
         vehicleInfo.setVehicleOwner(vehicleOwnerService.fromDto(vehicleInfoDto.getVehicleOwnerDto()));
-        vehicleInfo.setDriver(null);
+        vehicleInfo.setDriver(driverList);
 
         return vehicleInfo;
     }

@@ -27,7 +27,12 @@ public class AgencyService {
 
     public Agency addAgency(AgencyDto agencyDto){
         Agency agency = fromDto(agencyDto);
-        agencyRepository.save(agency);
+        if(!agencyRepository.findByAgencyNo(agencyDto.getAgencyNo()).isPresent()){
+            agencyRepository.save(agency);
+        }else{
+            System.out.println("kayıt var");
+        }
+
         return agency;
     }
 

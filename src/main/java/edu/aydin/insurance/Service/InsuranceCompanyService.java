@@ -27,7 +27,11 @@ public class InsuranceCompanyService {
 
     public InsuranceCompany addInsuranceCompany(InsuranceCompanyDto insuranceCompanyDto){
         InsuranceCompany insuranceCompany = fromDto(insuranceCompanyDto);
-        insuranceCompanyRepository.save(insuranceCompany);
+        if(!insuranceCompanyRepository.findByCompanyName(insuranceCompanyDto.getCompanyName()).isPresent()){
+            insuranceCompanyRepository.save(insuranceCompany);
+        }else{
+            System.out.println("kayıt bulundu ve eklemedi");
+        }
         return insuranceCompany;
 
     }
