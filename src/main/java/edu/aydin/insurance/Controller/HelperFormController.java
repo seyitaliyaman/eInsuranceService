@@ -30,8 +30,8 @@ public class HelperFormController {
     @Autowired
     private DriverService driverService;
 
-    @PostMapping(path = "/add/case")
-    public void addCases(@RequestBody CasesDto casesDto, @RequestHeader("ServiceId") Long serviceId){
+    @PostMapping(path = "/add/case/{serviceId}")
+    public void addCases(@RequestBody CasesDto casesDto, @PathVariable Long serviceId){
         casesService.addCases(casesDto,serviceId);
     }
 
