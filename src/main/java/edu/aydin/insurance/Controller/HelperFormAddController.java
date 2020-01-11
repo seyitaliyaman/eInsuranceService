@@ -3,15 +3,13 @@ package edu.aydin.insurance.Controller;
 import edu.aydin.insurance.Dtos.*;
 import edu.aydin.insurance.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
 
 @RestController
-@RequestMapping("/cases")
-public class CasesController {
+@RequestMapping("/add")
+public class HelperFormAddController {
 
     @Autowired
     private CasesService casesService;
