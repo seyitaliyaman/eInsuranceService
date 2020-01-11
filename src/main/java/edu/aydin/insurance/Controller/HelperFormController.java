@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/add")
-public class HelperFormAddController {
+@RequestMapping("/helper")
+public class HelperFormController {
 
     @Autowired
     private CasesService casesService;
@@ -30,23 +30,35 @@ public class HelperFormAddController {
     @Autowired
     private DriverService driverService;
 
+    @PostMapping(path = "/add/case")
+    public void addCases(@RequestBody CasesDto casesDto, @RequestHeader("ServiceId") Long serviceId){
+        casesService.addCases(casesDto,serviceId);
+    }
 
-    @PostMapping(path = "/vehicleinfo")
+
+    @PostMapping(path = "/delete/case/{id}")
+    public void deleteCaseById(@PathVariable Long id){
+        casesService.deleteCaseById(id);
+    }
+
+
+/** Buralar şu an kullanılmayacak**/
+    @PostMapping(path = "/add/vehicleinfo")
     public void addVehicleInfo(@RequestBody VehicleInfoDto vehicleInfoDto){
         vehicleInfoService.addVehicleInfo(vehicleInfoDto);
     }
 
-    @PostMapping(path = "/vehicleowner")
+    @PostMapping(path = "/add/vehicleowner")
     public void addVehicleOwner(@RequestBody VehicleOwnerDto vehicleOwnerDto){
         vehicleOwnerService.addVehicleOwner(vehicleOwnerDto);
     }
 
-    @PostMapping(path = "/driver")
+    @PostMapping(path = "/add/driver")
     public void addDriver(@RequestBody DriverDto driverDto){
         driverService.addDriver(driverDto);
     }
 
-    @PostMapping(path = "/inscomp")
+    @PostMapping(path = "/add/inscomp")
     public void addInsuranceCompany(@RequestBody InsuranceCompanyDto insuranceCompanyDto){
         insuranceCompanyService.addInsuranceCompany(insuranceCompanyDto);
     }
@@ -66,9 +78,6 @@ public class HelperFormAddController {
         expertService.addExpert(expertDto);
     }
 
-    @PostMapping(path = "/case")
-    public void addCases(@RequestBody CasesDto casesDto){
-        casesService.addCases(casesDto);
-    }
+
 
 }

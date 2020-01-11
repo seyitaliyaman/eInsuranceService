@@ -54,13 +54,13 @@ public class VehicleInfo {
 
     @Getter
     @Setter
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private VehicleOwner vehicleOwner;
 
     @Getter
     @Setter
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Driver> driver;
 

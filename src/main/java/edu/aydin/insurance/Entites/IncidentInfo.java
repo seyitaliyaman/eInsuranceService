@@ -54,13 +54,13 @@ public class IncidentInfo {
 
     @Getter
     @Setter
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private VehicleInfo firstVehicle;
 
     @Getter
     @Setter
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private VehicleInfo secondVehicle;
 }

@@ -45,13 +45,13 @@ public class Cases {
 
     @Getter
     @Setter
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Policy policy;
 
     @Getter
     @Setter
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private IncidentInfo incidentInfo;
 
@@ -62,7 +62,7 @@ public class Cases {
 
     @Getter
     @Setter
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Expert expert;
 

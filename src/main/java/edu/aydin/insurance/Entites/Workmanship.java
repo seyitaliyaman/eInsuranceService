@@ -49,7 +49,7 @@ public class Workmanship {
 
     @Getter
     @Setter
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<WorkmanshipPart> workmanshipPart;
 

@@ -39,7 +39,7 @@ public class Agency {
 
     @Getter
     @Setter
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private InsuranceCompany insuranceCompany;
 

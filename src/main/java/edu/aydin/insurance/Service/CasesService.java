@@ -2,6 +2,7 @@ package edu.aydin.insurance.Service;
 
 import edu.aydin.insurance.Dtos.CasesDto;
 import edu.aydin.insurance.Entites.Cases;
+import edu.aydin.insurance.Entites.ServiceInc;
 import edu.aydin.insurance.Exceptions.CasesListNotFoundException;
 import edu.aydin.insurance.Exceptions.CasesNotFoundException;
 import edu.aydin.insurance.Repository.CasesRepository;
@@ -62,11 +63,21 @@ public class CasesService {
     }
 
 
-    public Cases addCases(CasesDto casesDto){
+    public Cases addCases(CasesDto casesDto,Long serviceId){
+        ServiceInc serviceInc = serviceIncService.getService(serviceId);
+        casesDto.setServiceDto(serviceIncService.toDto(serviceInc));
         Cases cases = fromDto(casesDto);
+        cases.setService(serviceInc);
         casesRepository.save(cases);
 
         return cases;
+    }
+
+    public void deleteCaseById(Long id){
+        Optional<Cases> cases = casesRepository.findById(id);
+        if(cases.isPresent()){
+            casesRepository.delete(cases.get());
+        }
     }
 
 

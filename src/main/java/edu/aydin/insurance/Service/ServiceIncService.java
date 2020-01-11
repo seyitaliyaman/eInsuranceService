@@ -31,6 +31,14 @@ public class ServiceIncService {
         throw new ServiceIncNotFoundException();
     }
 
+    public ServiceInc getService(Long id){
+        Optional<ServiceInc> serviceInc = serviceIncRepository.findById(id);
+        if(serviceInc.isPresent()){
+            return serviceInc.get();
+        }
+        throw new ServiceIncNotFoundException();
+    }
+
 
     public ServiceInc fromDto(ServiceIncDto serviceIncDto){
         ServiceInc serviceInc = new ServiceInc();
