@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 import java.util.Date;
@@ -53,11 +55,13 @@ public class VehicleInfo {
     @Getter
     @Setter
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private VehicleOwner vehicleOwner;
 
     @Getter
     @Setter
     @ManyToMany
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Driver> driver;
 
 }

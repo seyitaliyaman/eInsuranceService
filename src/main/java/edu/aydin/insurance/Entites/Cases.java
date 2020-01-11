@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 import java.util.Date;
@@ -44,11 +46,13 @@ public class Cases {
     @Getter
     @Setter
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Policy policy;
 
     @Getter
     @Setter
     @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private IncidentInfo incidentInfo;
 
     @Getter
@@ -59,6 +63,7 @@ public class Cases {
     @Getter
     @Setter
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Expert expert;
 
 
