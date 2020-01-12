@@ -4,11 +4,13 @@ import edu.aydin.insurance.Dtos.UsedPiecesDto;
 import edu.aydin.insurance.Dtos.VehiclePartDto;
 import edu.aydin.insurance.Dtos.WorkOrderDto;
 import edu.aydin.insurance.Dtos.WorkmanshipDto;
+import edu.aydin.insurance.Entites.Cases;
 import edu.aydin.insurance.Entites.WorkOrder;
 import edu.aydin.insurance.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,6 +34,21 @@ public class WorkOrderController {
     public Long addWorkOrder(@RequestBody WorkOrderDto workOrder, @PathVariable Long caseId){
         WorkOrder order = workOrderService.addWorkOrder(workOrder,caseId);
         return order.getId();
+    }
+
+    @GetMapping("/getWorkOrdersByService/{serviceId}")
+    public List<WorkOrder> getWorkOrders(@PathVariable Long serviceId){
+        List<Cases> cases = casesService.getCasesByServiceId(serviceId);
+        List<WorkOrder> orders = new ArrayList<>();
+        for (Cases kase:cases){
+            orders.add(workOrderService.getByCaseId(kase.getId()));
+        }
+        return orders;
+    }
+
+    @GetMapping("/getWorkOrderByCase/{caseId}")
+    public WorkOrder getWorkOrder(@PathVariable Long caseId){
+        return workOrderService.getByCaseId(caseId);
     }
 
     @GetMapping("/getVehicleParts")
