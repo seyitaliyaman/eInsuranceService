@@ -49,11 +49,11 @@ public class WorkOrderController {
         workmanshipService.addWorkmanshipList(workmanships,workOrderId);
     }
 
-    /*@PostMapping(path = "/addUsedPartList/{workOrderId}")
+    @PostMapping(path = "/addUsedPartList/{workOrderId}")
     public void addUsedPieces(@RequestBody List<UsedPiecesDto> usedPiecesDtos, @PathVariable Long workOrderId){
 
-        //usedPiecesService
+        usedPiecesService.addUsedPieces(usedPiecesDtos,workOrderId);
 
-    }*/
+    }
 
 }

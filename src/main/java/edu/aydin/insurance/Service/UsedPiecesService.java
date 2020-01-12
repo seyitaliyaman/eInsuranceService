@@ -33,8 +33,10 @@ public class UsedPiecesService {
 
     public List<UsedPieces> addUsedPieces(List<UsedPiecesDto> usedPieces,Long workOrderId){
         List<UsedPieces> usedPiecesList = new ArrayList<>();
+        WorkOrder workOrder = workOrderService.getWorkOrderWithId(workOrderId);
         for (UsedPiecesDto usedPiece:usedPieces){
             UsedPieces usedPieces1 = fromDto(usedPiece);
+            usedPieces1.setWorkOrder(workOrder);
             usedPiecesList.add(usedPieces1);
         }
         usedPiecesRepository.saveAll(usedPiecesList);
@@ -52,32 +54,32 @@ public class UsedPiecesService {
 
     public UsedPiecesDto toDto(UsedPieces usedPieces){
 
-        List<WorkOrder> list = usedPieces.getWorkOrder();
-        List<WorkOrderDto> listDto = new ArrayList<>();
+        WorkOrder workOrder = usedPieces.getWorkOrder();
+        /*List<WorkOrderDto> listDto = new ArrayList<>();
         for (WorkOrder order: list){
             listDto.add(workOrderService.toDto(order));
-        }
+        }*/
 
         return new UsedPiecesDto(
                 usedPieces.getId(),
                 usedPieces.getQuantity(),
-                listDto,
+                workOrderService.toDto(workOrder),
                 pieceService.toDto(usedPieces.getPiece())
         );
     }
 
     public UsedPieces fromDto(UsedPiecesDto usedPiecesDto){
 
-        List<WorkOrderDto> list = usedPiecesDto.getWorkOrderDto();
-        List<WorkOrder> listDto = new ArrayList<>();
+        WorkOrderDto workOrderDto = usedPiecesDto.getWorkOrderDto();
+        /*List<WorkOrder> listDto = new ArrayList<>();
         for (WorkOrderDto order: list){
             listDto.add(workOrderService.fromDto(order));
-        }
+        }*/
 
         UsedPieces usedPieces = new UsedPieces();
         usedPieces.setId(usedPiecesDto.getId());
         usedPieces.setQuantity(usedPiecesDto.getQuantity());
-        usedPieces.setWorkOrder(listDto);
+        //usedPieces.setWorkOrder(workOrderService.fromDto(workOrderDto));
         usedPieces.setPiece(pieceService.fromDto(usedPiecesDto.getPieceDto()));
         return usedPieces;
     }

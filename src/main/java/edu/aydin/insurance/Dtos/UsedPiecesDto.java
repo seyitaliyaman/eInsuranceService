@@ -21,7 +21,7 @@ public class UsedPiecesDto {
 
     @Getter
     @Setter
-    private List<WorkOrderDto> workOrderDto;
+    private WorkOrderDto workOrderDto;
 
     @Getter
     @Setter

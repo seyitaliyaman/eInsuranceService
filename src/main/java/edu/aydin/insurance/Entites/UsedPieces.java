@@ -39,8 +39,8 @@ public class UsedPieces {
 
     @Getter
     @Setter
-    @ManyToMany
-    private List<WorkOrder> workOrder;
+    @ManyToOne
+    private WorkOrder workOrder;
 
     @Getter
     @Setter
