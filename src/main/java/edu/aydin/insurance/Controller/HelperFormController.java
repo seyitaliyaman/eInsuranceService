@@ -14,8 +14,6 @@ public class HelperFormController {
     @Autowired
     private CasesService casesService;
     @Autowired
-    private ServiceIncService serviceIncService;
-    @Autowired
     private ExpertService expertService;
     @Autowired
     private PolicyService policyService;
@@ -41,6 +39,11 @@ public class HelperFormController {
         casesService.deleteCaseById(id);
     }
 
+    @PostMapping(path = "/update/case/{caseId}")
+    public void updateCaseById(@RequestBody ExpertDto expertDto,@RequestHeader("fileNo") Long fileNo, @PathVariable Long caseId){
+        casesService.updateCase(expertDto,fileNo,caseId);
+    }
+
 
 /** Buralar şu an kullanılmayacak**/
     @PostMapping(path = "/add/vehicleinfo")
@@ -52,6 +55,7 @@ public class HelperFormController {
     public void addVehicleOwner(@RequestBody VehicleOwnerDto vehicleOwnerDto){
         vehicleOwnerService.addVehicleOwner(vehicleOwnerDto);
     }
+
 
     @PostMapping(path = "/add/driver")
     public void addDriver(@RequestBody DriverDto driverDto){

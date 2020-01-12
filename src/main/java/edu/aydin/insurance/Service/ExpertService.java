@@ -29,6 +29,17 @@ public class ExpertService {
         return expert;
     }
 
+    public void updateExpert(ExpertDto expertDto, Long id){
+        Optional<Expert> expert = expertRepository.findById(id);
+        if(expert.isPresent()){
+            Expert updExpert = expert.get();
+            updExpert.setExpertPhone(expertDto.getExpertPhone());
+            updExpert.setExpertSurname(expertDto.getExpertSurname());
+            updExpert.setExpertName(expertDto.getExpertName());
+            expertRepository.save(updExpert);
+        }
+    }
+
 
     public Expert fromDto(ExpertDto expertDto){
         Expert expert = new Expert();

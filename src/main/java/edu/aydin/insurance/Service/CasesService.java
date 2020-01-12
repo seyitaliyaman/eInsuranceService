@@ -1,11 +1,14 @@
 package edu.aydin.insurance.Service;
 
 import edu.aydin.insurance.Dtos.CasesDto;
+import edu.aydin.insurance.Dtos.ExpertDto;
 import edu.aydin.insurance.Entites.Cases;
+import edu.aydin.insurance.Entites.Expert;
 import edu.aydin.insurance.Entites.ServiceInc;
 import edu.aydin.insurance.Exceptions.CasesListNotFoundException;
 import edu.aydin.insurance.Exceptions.CasesNotFoundException;
 import edu.aydin.insurance.Repository.CasesRepository;
+import edu.aydin.insurance.Repository.ExpertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +33,9 @@ public class CasesService {
 
     @Autowired
     private ExpertService expertService;
+
+    @Autowired
+    private ExpertRepository expertRepository;
 
 
     public List<CasesDto> getAllCasesByServiceId(Long serviceId){
@@ -77,6 +83,17 @@ public class CasesService {
         Optional<Cases> cases = casesRepository.findById(id);
         if(cases.isPresent()){
             casesRepository.delete(cases.get());
+        }
+    }
+
+    public void updateCase(ExpertDto expertDto,Long fileNo, Long caseId){
+        Optional<Cases> cases = casesRepository.findById(caseId);
+
+        if(cases.isPresent()){
+            expertService.updateExpert(expertDto,cases.get().getExpert().getId());
+            Cases updCases = cases.get();
+            updCases.setFileNo(fileNo);
+            casesRepository.save(updCases);
         }
     }
 
