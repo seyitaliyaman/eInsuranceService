@@ -96,7 +96,7 @@ public class WorkmanshipService {
         Workmanship workmanship = new Workmanship();
         workmanship.setCost(workmanshipDto.getCost());
         workmanship.setDone(workmanshipDto.isDone());
-        workmanship.setId(workmanshipDto.getId());
+        //workmanship.setId(workmanshipDto.getId());
         workmanship.setVehiclePart(vehiclePartService.fromDto(vehiclePartDtos));
         workmanship.setWorkmanshipPart(workmanshipPartService.fromDto(workmanshipPartDtos));
         return workmanship;

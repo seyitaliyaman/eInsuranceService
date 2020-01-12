@@ -24,10 +24,21 @@ public class UsedPiecesService {
     @Autowired
     private PieceService pieceService;
 
-    public UsedPieces addUsedPiece(UsedPiecesDto usedPiecesDto){
+    public UsedPieces addUsedPiece(UsedPiecesDto usedPiecesDto,Long workOrderId){
         UsedPieces usedPieces = fromDto(usedPiecesDto);
+        //usedPieces.setWorkOrder(workOrderService.getWorkOrderWithId(workOrderId));
         usedPiecesRepository.save(usedPieces);
         return usedPieces;
+    }
+
+    public List<UsedPieces> addUsedPieces(List<UsedPiecesDto> usedPieces,Long workOrderId){
+        List<UsedPieces> usedPiecesList = new ArrayList<>();
+        for (UsedPiecesDto usedPiece:usedPieces){
+            UsedPieces usedPieces1 = fromDto(usedPiece);
+            usedPiecesList.add(usedPieces1);
+        }
+        usedPiecesRepository.saveAll(usedPiecesList);
+        return usedPiecesList;
     }
 
     public List<UsedPiecesDto> getPiecesByWorkOrderId(Long workOrderId){
