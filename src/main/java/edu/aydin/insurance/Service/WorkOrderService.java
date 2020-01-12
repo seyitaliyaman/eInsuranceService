@@ -34,10 +34,26 @@ public class WorkOrderService {
         return workOrder;
     }
 
+    public WorkOrder getByCaseId(Long caseId){
+        Optional<WorkOrder> workOrder = workOrderRepository.findByCases(caseId);
+        if (workOrder.isPresent()){
+            return workOrder.get();
+        }
+        throw new WorkOrderNotFoundException();
+    }
+
     public WorkOrderDto getWorkOrderById(Long id){
         Optional<WorkOrder> workOrder = workOrderRepository.findById(id);
         if(workOrder.isPresent()){
             return toDto(workOrder.get());
+        }
+        throw new WorkOrderNotFoundException();
+    }
+
+    public WorkOrder getWorkOrderWithId(Long id){
+        Optional<WorkOrder> workOrder = workOrderRepository.findById(id);
+        if (workOrder.isPresent()){
+            return workOrder.get();
         }
         throw new WorkOrderNotFoundException();
     }

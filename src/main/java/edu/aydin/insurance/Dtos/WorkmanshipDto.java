@@ -25,10 +25,10 @@ public class WorkmanshipDto {
 
     @Getter
     @Setter
-    private List<WorkmanshipPartDto> workmanshipPartDto;
+    private WorkmanshipPartDto workmanshipPartDto;
 
     @Getter
     @Setter
-    private List<VehiclePartDto> vehiclePartDto;
+    private VehiclePartDto vehiclePartDto;
 
 }

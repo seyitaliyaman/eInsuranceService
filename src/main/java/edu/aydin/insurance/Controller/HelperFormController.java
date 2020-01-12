@@ -40,6 +40,11 @@ public class HelperFormController {
        return casesService.getCasesByServiceId(serviceId);
     }
 
+    @GetMapping("/getCase/{caseId}")
+    public Cases getCaseById(@PathVariable Long caseId){
+        return casesService.getCasesWithId(caseId);
+    }
+
 
     @PostMapping(path = "/delete/case/{id}")
     public void deleteCaseById(@PathVariable Long id){

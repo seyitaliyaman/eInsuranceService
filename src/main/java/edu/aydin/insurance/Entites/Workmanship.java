@@ -44,19 +44,19 @@ public class Workmanship {
 
     @Getter
     @Setter
-    @ManyToMany
-    private List<WorkOrder> workOrder;
+    @ManyToOne
+    private WorkOrder workOrder;
 
     @Getter
     @Setter
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<WorkmanshipPart> workmanshipPart;
+    private WorkmanshipPart workmanshipPart;
 
     @Getter
     @Setter
-    @ManyToMany
-    private List<VehiclePart> vehiclePart;
+    @ManyToOne
+    private VehiclePart vehiclePart;
 
 
 }

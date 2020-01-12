@@ -9,4 +9,5 @@ public interface WorkOrderRepository extends JpaRepository<WorkOrder,Long> {
 
     Optional<WorkOrder> findByVehicleChassis(String chassis);
     Optional<WorkOrder> findByMotorNumber(String motorNumber);
+    Optional<WorkOrder> findByCases(Long casesId);
 }

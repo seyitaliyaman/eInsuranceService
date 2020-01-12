@@ -26,10 +26,25 @@ public class WorkmanshipService {
     @Autowired
     private VehiclePartService vehiclePartService;
 
-    public Workmanship addWorkmanship(WorkmanshipDto workmanshipDto){
+    @Autowired
+    private WorkOrderService workOrderService;
+
+    public Workmanship addWorkmanship(WorkmanshipDto workmanshipDto, Long workOrderId){
         Workmanship workmanship = fromDto(workmanshipDto);
+        workmanship.setWorkOrder(workOrderService.getWorkOrderWithId(workOrderId));
         workmanshipRepository.save(workmanship);
         return workmanship;
+    }
+
+    public List<Workmanship> addWorkmanshipList(List<WorkmanshipDto> list, Long workOrderId){
+        List<Workmanship> workmanships = new ArrayList<>();
+        for (WorkmanshipDto dto:list){
+            Workmanship workmanship = fromDto(dto);
+            workmanship.setWorkOrder(workOrderService.getWorkOrderWithId(workOrderId));
+            workmanships.add(workmanship);
+        }
+        workmanshipRepository.saveAll(workmanships);
+        return workmanships;
     }
 
     public List<WorkmanshipDto> getWorkmanshipByWorkOrderId(Long id){
@@ -43,47 +58,47 @@ public class WorkmanshipService {
 
     public WorkmanshipDto toDto(Workmanship workmanship){
 
-        List<WorkmanshipPart> workmanshipParts = workmanship.getWorkmanshipPart();
-        List<WorkmanshipPartDto> workmanshipPartDtos = new ArrayList<>();
+        WorkmanshipPart workmanshipParts = workmanship.getWorkmanshipPart();
+        //List<WorkmanshipPartDto> workmanshipPartDtos = new ArrayList<>();
 
-        for (WorkmanshipPart part:workmanshipParts){
-            workmanshipPartDtos.add(workmanshipPartService.toDto(part));
-        }
+        //for (WorkmanshipPart part:workmanshipParts){
+            //workmanshipPartDtos.add(workmanshipPartService.toDto(workmanshipParts));
+        //}
 
-        List<VehiclePart> vehicleParts = workmanship.getVehiclePart();
-        List<VehiclePartDto> vehiclePartDtos = new ArrayList<>();
+        VehiclePart vehicleParts = workmanship.getVehiclePart();
+        /*List<VehiclePartDto> vehiclePartDtos = new ArrayList<>();
 
         for (VehiclePart part:vehicleParts){
             vehiclePartDtos.add(vehiclePartService.toDto(part));
-        }
+        }*/
 
         return new WorkmanshipDto(workmanship.getId(),
                 workmanship.getCost(),
                 workmanship.isDone(),
-                workmanshipPartDtos,
-                vehiclePartDtos
+                workmanshipPartService.toDto(workmanshipParts),
+                vehiclePartService.toDto(vehicleParts)
         );
     }
 
     public Workmanship fromDto(WorkmanshipDto workmanshipDto){
-        List<WorkmanshipPartDto> workmanshipPartDtos = workmanshipDto.getWorkmanshipPartDto();
-        List<WorkmanshipPart> workmanshipParts = new ArrayList<>();
+        WorkmanshipPartDto workmanshipPartDtos = workmanshipDto.getWorkmanshipPartDto();
+        /*List<WorkmanshipPart> workmanshipParts = new ArrayList<>();
         for (WorkmanshipPartDto partDto:workmanshipPartDtos){
             workmanshipParts.add(workmanshipPartService.fromDto(partDto));
-        }
+        }*/
 
-        List<VehiclePartDto> vehiclePartDtos = workmanshipDto.getVehiclePartDto();
-        List<VehiclePart> vehicleParts = new ArrayList<>();
+        VehiclePartDto vehiclePartDtos = workmanshipDto.getVehiclePartDto();
+        /*List<VehiclePart> vehicleParts = new ArrayList<>();
         for (VehiclePartDto vehiclePartDto:vehiclePartDtos){
             vehicleParts.add(vehiclePartService.fromDto(vehiclePartDto));
-        }
+        }*/
 
         Workmanship workmanship = new Workmanship();
         workmanship.setCost(workmanshipDto.getCost());
         workmanship.setDone(workmanshipDto.isDone());
         workmanship.setId(workmanshipDto.getId());
-        workmanship.setVehiclePart(vehicleParts);
-        workmanship.setWorkmanshipPart(workmanshipParts);
+        workmanship.setVehiclePart(vehiclePartService.fromDto(vehiclePartDtos));
+        workmanship.setWorkmanshipPart(workmanshipPartService.fromDto(workmanshipPartDtos));
         return workmanship;
     }
 
