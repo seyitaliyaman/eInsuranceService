@@ -68,6 +68,21 @@ public class CasesService {
         throw new CasesNotFoundException();
     }
 
+    public Cases getCasesWithId(Long id){
+        Optional<Cases> cases = casesRepository.findById(id);
+        if(cases.isPresent()){
+            return cases.get();
+        }
+        throw new CasesNotFoundException();
+    }
+
+    public List<Cases> getCasesByServiceId(Long id){
+        Optional<List<Cases>> cases = casesRepository.findAllByServiceId(id);
+        if (cases.isPresent()){
+            return cases.get();
+        }
+        throw new CasesNotFoundException();
+    }
 
     public Cases addCases(CasesDto casesDto,Long serviceId){
         ServiceInc serviceInc = serviceIncService.getService(serviceId);

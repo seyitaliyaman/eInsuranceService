@@ -84,7 +84,7 @@ public class VehicleInfoService {
         vehicleInfo.setVehicleBrand(vehicleInfoDto.getVehicleBrand());
         vehicleInfo.setVehicleModel(vehicleInfoDto.getVehicleModel());
         vehicleInfo.setVehiclePlate(vehicleInfoDto.getVehiclePlate());
-        vehicleInfo.setVehicleUsage(vehicleInfo.getVehicleUsage());
+        vehicleInfo.setVehicleUsage(vehicleInfoDto.getVehicleUsage());
         vehicleInfo.setVehicleOwner(vehicleOwnerService.fromDto(vehicleInfoDto.getVehicleOwnerDto()));
         vehicleInfo.setDriver(driverList);
 

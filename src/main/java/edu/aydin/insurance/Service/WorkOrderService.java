@@ -1,6 +1,7 @@
 package edu.aydin.insurance.Service;
 
 import edu.aydin.insurance.Dtos.WorkOrderDto;
+import edu.aydin.insurance.Entites.Cases;
 import edu.aydin.insurance.Entites.WorkOrder;
 import edu.aydin.insurance.Exceptions.WorkOrderNotFoundException;
 import edu.aydin.insurance.Repository.WorkOrderRepository;
@@ -23,8 +24,12 @@ public class WorkOrderService {
 
 
 
-    public WorkOrder addWorkOrder(WorkOrderDto workOrderDto){
+    public WorkOrder addWorkOrder(WorkOrderDto workOrderDto,Long caseId){
+        workOrderDto.setCasesDto(casesService.getCasesById(caseId));
+        Cases cases = casesService.getCasesWithId(caseId);
         WorkOrder workOrder = fromDto(workOrderDto);
+        workOrder.setCases(cases);
+        workOrder.setVehicleInfo(cases.getIncidentInfo().getFirstVehicle());
         workOrderRepository.save(workOrder);
         return workOrder;
     }

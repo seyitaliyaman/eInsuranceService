@@ -1,10 +1,12 @@
 package edu.aydin.insurance.Controller;
 
 import edu.aydin.insurance.Dtos.*;
+import edu.aydin.insurance.Entites.Cases;
 import edu.aydin.insurance.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -31,6 +33,11 @@ public class HelperFormController {
     @PostMapping(path = "/add/case/{serviceId}")
     public void addCases(@RequestBody CasesDto casesDto, @PathVariable Long serviceId){
         casesService.addCases(casesDto,serviceId);
+    }
+
+    @GetMapping("/getCases/{serviceId}")
+    public List<Cases> getCasesByServiceId(@PathVariable Long serviceId){
+       return casesService.getCasesByServiceId(serviceId);
     }
 
 

@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface CasesRepository extends JpaRepository<Cases,Long> {
     Optional<List<Cases>> findAllByServiceId(Long serviceId);
     Optional<Cases> findByFileNo(Long fileNo);
+    Optional<List<Cases>> findByService(Long serviceId);
 
 
 }
