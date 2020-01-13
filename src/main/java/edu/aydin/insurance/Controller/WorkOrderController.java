@@ -41,14 +41,15 @@ public class WorkOrderController {
         List<Cases> cases = casesService.getCasesByServiceId(serviceId);
         List<WorkOrder> orders = new ArrayList<>();
         for (Cases kase:cases){
-            orders.add(workOrderService.getByCaseId(kase.getId()));
+            orders.add(workOrderService.getByCaseId(kase));
         }
         return orders;
     }
 
     @GetMapping("/getWorkOrderByCase/{caseId}")
     public WorkOrder getWorkOrder(@PathVariable Long caseId){
-        return workOrderService.getByCaseId(caseId);
+
+        return workOrderService.getByCaseId(casesService.getCasesWithId(caseId));
     }
 
     @GetMapping("/getVehicleParts")

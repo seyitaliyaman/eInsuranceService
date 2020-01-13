@@ -34,8 +34,9 @@ public class WorkOrderService {
         return workOrder;
     }
 
-    public WorkOrder getByCaseId(Long caseId){
-        Optional<WorkOrder> workOrder = workOrderRepository.findByCases(caseId);
+    public WorkOrder getByCaseId(Cases cases){
+
+        Optional<WorkOrder> workOrder = workOrderRepository.findByCases(cases);
         if (workOrder.isPresent()){
             return workOrder.get();
         }
