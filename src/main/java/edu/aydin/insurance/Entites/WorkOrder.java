@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
@@ -47,6 +49,7 @@ public class WorkOrder {
     @Getter
     @Setter
     @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Cases cases;
 
     @Getter

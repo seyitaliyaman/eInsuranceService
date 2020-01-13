@@ -4,6 +4,7 @@ import edu.aydin.insurance.Dtos.VehiclePartDto;
 import edu.aydin.insurance.Dtos.WorkmanshipDto;
 import edu.aydin.insurance.Dtos.WorkmanshipPartDto;
 import edu.aydin.insurance.Entites.VehiclePart;
+import edu.aydin.insurance.Entites.WorkOrder;
 import edu.aydin.insurance.Entites.Workmanship;
 import edu.aydin.insurance.Entites.WorkmanshipPart;
 import edu.aydin.insurance.Repository.WorkmanshipRepository;
@@ -47,8 +48,8 @@ public class WorkmanshipService {
         return workmanships;
     }
 
-    public List<WorkmanshipDto> getWorkmanshipByWorkOrderId(Long id){
-        Optional<List<Workmanship>> workmanships = workmanshipRepository.findAllByWorkOrder(id);
+    public List<WorkmanshipDto> getWorkmanshipByWorkOrder(WorkOrder order){
+        Optional<List<Workmanship>> workmanships = workmanshipRepository.findAllByWorkOrder(order);
         List<WorkmanshipDto> workmanshipDtos = new ArrayList<>();
         for (Workmanship workmanship:workmanships.get()){
             workmanshipDtos.add(toDto(workmanship));

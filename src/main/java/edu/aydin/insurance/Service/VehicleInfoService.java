@@ -44,6 +44,9 @@ public class VehicleInfoService {
         return vehicleInfoDtoList;
     }
 
+    public VehicleInfo getVehicleByPlate(String plate){
+        return vehicleInfoRepository.findByVehiclePlate(plate).get();
+    }
 
     public VehicleInfoDto getVehicleInfoById(Long id){
         Optional<VehicleInfo> vehicleInfo = vehicleInfoRepository.findById(id);
